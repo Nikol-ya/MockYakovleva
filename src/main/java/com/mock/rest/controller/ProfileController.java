@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -28,10 +29,11 @@ public class ProfileController {
     @PostMapping("/")
     public String passAuthorization (@RequestBody Profile profile) throws JsonProcessingException, InterruptedException {
         String login = profile.getLogin();
-        LocalDateTime date = LocalDateTime.now();
+        Date dateNow = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Map<String, String> response = new HashMap<>();
         response.put("login", login);
-        response.put("date", String.valueOf(date));
+        response.put("date", dateFormat.format(dateNow));
         ObjectMapper objectMapper = new ObjectMapper();
         String responseJson = objectMapper.writeValueAsString(response);
         TimeUnit.SECONDS.sleep(3);
