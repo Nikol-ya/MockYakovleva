@@ -1,8 +1,8 @@
 package com.mock.rest.model;
 
 public class Profile {
-    private final int password;
     private final String login;
+    private final int password;
 
     public Profile(String login, int password) {
         this.login = login;
